@@ -34,3 +34,12 @@ RUN conda install nbgrader --yes
 # gotchas: Not yet compatible with Jupyter Lab. Expected 1.1 integration (Sept 2019).
 # See https://github.com/damianavila/RISE/issues/270
 RUN conda install rise --no-deps --yes
+
+# Add nbgrade config file
+COPY ./nbgrader_config.py /home/jovyan/nbgrader_config.py
+
+# Add nbgrader exchange directory
+RUN mkdir -p /tmp/nbgrader/exchange && chmod ugo+rw /tmp/nbgrader/exchange
+# RUN mkdir -p /srv/nbgrader/exchange && chmod ugo+rw /srv/nbgrader/exchange
+
+# WORKDIR /notebooks
