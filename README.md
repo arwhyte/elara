@@ -2,7 +2,7 @@
 Docker image based on the jupyter/scipy-notebook image. Adds [nbgrader](https://github.com/jupyter/nbgrader) 
 and [rise](https://github.com/damianavila/RISE).
 
-# Generate image
+## Generate image
 Build the image. Note the trailing ".". Flags:
 * -f &minus; path to file.
 * -t &minus; tag name.
@@ -11,7 +11,7 @@ Build the image. Note the trailing ".". Flags:
 docker build -f ./Dockerfile -t jpyedu-scipy:latest .
 ```
 
-# Run image in new container (JupyterLab)
+## Run image in new container (JupyterLab)
 Run the image, invoking the JupyterLab interface. Flags:
 * --rm &minus; automatically clean up the container and remove the file system when the container exits. 
 Also removes anonymous volumes associated with the container.
@@ -21,10 +21,10 @@ Also removes anonymous volumes associated with the container.
 * --name &minus; set local container name.
 
 ```cmd
-docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/jupyter:/home/jovyan/workspace -e JUPYTER_ENABLE_LAB=yes --name jupyter_lab jpyedu-scipy
+docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work -e JUPYTER_ENABLE_LAB=yes --name jupyter_lab jpyedu-scipy
 ```
 
-# Run image in new container (Jupyter notebook classic)
+## Run image in new container (Jupyter notebook classic)
 Run the image, invoking the classic Jupyter notebook interface. Other flags:
 * --rm &minus; automatically clean up the container and remove the file system when the container exits. 
 Also removes anonymous volumes associated with the container.
@@ -33,5 +33,51 @@ Also removes anonymous volumes associated with the container.
 * --name &minus; set local container name.
 
 ```cmd
-docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/jupyter:/home/jovyan/workspace --name jupyter_notebook jpyedu-scipy
+docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work --name jupyter_notebook jpyedu-scipy
 ```
+
+## Remove containers
+
+:warning: Docker containers are automatically removed when you stop them if you start the container 
+using the `--rm` flag (as above.
+
+```commandline
+$ docker container ls -a
+
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+e65a3686df04        jpyedu-scipy        "tini -g -- start-no…"   6 minutes ago       Up 6 minutes        0.0.0.0:8888->8888/tcp   jupyter_notebook
+
+$ docker stop e65a3686df04
+$ docker rm e65a3686df04    
+```
+
+## Dockerfile
+
+Image based on Jupyter Docker Stacks 
+[jupyter/scipy-notebook](https://github.com/jupyter/docker-stacks/tree/master/scipy-notebook) which, in turn, is based on the jupyter/minimal-notebook.
+
+For package installs see:
+
+* minimal-notebook [Dockerfile](https://github.com/jupyter/docker-stacks/blob/36bce751008f2c38cf9bd1cfc5f4ba46f6b426f1/minimal-notebook/Dockerfile)
+* scipy-notebook [Dockerfile](https://github.com/jupyter/docker-stacks/blob/414b5d749704fc5abf15b5703551f0acb18e189a/scipy-notebook/Dockerfile)
+
+
+### Additional package installs
+* altair: visualization library (requires vega_datasets)
+* nbgrader: assignments and grading
+    - github: https://github.com/jupyter/nbgrader
+    - docs: https://nbgrader.readthedocs.io/en/stable/
+* rise: notebook slides
+    - github: https://github.com/damianavila/RISE
+    - docs: https://rise.readthedocs.io
+    - gotchas: Not yet compatible with Jupyter Lab. See https://github.com/damianavila/RISE/issues/270
+
+### Conda install flags
+
+```dockerfile
+
+# Install without progress bar (-q) or prompts (-y)
+RUN conda install [-q | --quiet] [-y | --yes] package_name 
+
+```
+

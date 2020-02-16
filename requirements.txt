@@ -1,0 +1,5 @@
+altair>=3.2.0
+fuzzywuzzy>=0.17.0
+nbgrader>=0.6.1
+rise>=5.6.0
+vega-datasets>=0.7.0
