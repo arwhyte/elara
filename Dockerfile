@@ -2,13 +2,27 @@ FROM jupyter/scipy-notebook
 
 LABEL maintainer="arwhyte@umich.edu"
 
-RUN conda update -n base conda
+RUN python3 -m pip install --upgrade pip
 
-RUN conda install --quiet --yes \
-    altair \
-    vega_datasets \
+RUN pip install \
+    altair vega_datasets \
+    folium \
+    geopandas \
+    plotly \
     nbgrader \
     rise
+
+# RUN conda update -n base conda
+
+# RUN conda install --quiet --yes \
+#    altair \
+#    vega_datasets \
+#    nbgrader \
+#    rise
+
+# -c = channel (search other channels for package)
+# https://plot.ly/python/getting-started/
+# RUN conda install -c plotly
 
 # Add nbgrade config file
 COPY nbgrader_config.py /home/jovyan/nbgrader_config.py

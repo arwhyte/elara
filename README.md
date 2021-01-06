@@ -1,5 +1,11 @@
 # jpyedu-scipy
-Docker image based on the jupyter/scipy-notebook image. Adds [nbgrader](https://github.com/jupyter/nbgrader) 
+Docker image based on the jupyter-docker-stacks `scipy-notebook` image, which is itself based
+on the `minimal-notebook` image, which is itself based on the `base-notebook` image.
+
+See https://github.com/jupyter/docker-stacks for each image's dockerfile.
+
+This image adds a number of additional packages including 
+[nbgrader](https://github.com/jupyter/nbgrader) 
 and [rise](https://github.com/damianavila/RISE).
 
 ## Generate image
