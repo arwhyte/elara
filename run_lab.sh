@@ -1,8 +1,12 @@
 #!/bin/bash
 
+# User-supplied values
+PORT=$1
+VOLUME=$2
+
 docker run \
-  --rm
-  -p 8888:8888
-  -v /Users/arwhyte/Development/jupyter:/home/jovyan/work
-  -e JUPYTER_ENABLE_LAB=yes
-  --name jupyter_lab jpyedu-scipy
+  --rm \
+  -p ${PORT}:8888 \
+  -v ${VOLUME}:/home/jovyan/work \
+  -e JUPYTER_ENABLE_LAB=yes \
+  --name lab elara
