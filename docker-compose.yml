@@ -7,4 +7,4 @@ services:
       - "8888:8888"
     volumes:
       - /Users/arwhyte/Development/repos/github/umsi-arwhyte/SI506-docs:/home/jovyan/workspace
-    container_name: jupyter_notebook
+    container_name: elara

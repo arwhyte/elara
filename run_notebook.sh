@@ -9,4 +9,4 @@ docker run \
   --rm \
   -p ${PORT}:8888 \
   -v ${VOLUME}:/home/jovyan/work \
-  --name ${NAME} jpyedu-scipy
+  --name ${NAME} elara

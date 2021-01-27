@@ -15,7 +15,7 @@ Build the image. Note the trailing ".". Flags:
 * -t &minus; tag name.
 
 ```cmd
-docker build -f ./Dockerfile -t jpyedu-scipy:latest .
+docker build -f ./Dockerfile -t elara:latest .
 ```
 
 ## Run image in new container (JupyterLab)
@@ -28,7 +28,7 @@ Also removes anonymous volumes associated with the container.
 * --name &minus; set local container name.
 
 ```cmd
-docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work -e JUPYTER_ENABLE_LAB=yes --name jupyter_lab jpyedu-scipy
+docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work -e JUPYTER_ENABLE_LAB=yes --name jupyter_lab elara
 ```
 
 ## Run image in new container (Jupyter notebook classic)
@@ -40,7 +40,7 @@ Also removes anonymous volumes associated with the container.
 * --name &minus; set local container name.
 
 ```cmd
-docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work --name jupyter_notebook jpyedu-scipy
+docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work --name jupyter_notebook elara
 ```
 
 ## Remove containers
@@ -52,7 +52,7 @@ using the `--rm` flag (as above.
 $ docker container ls -a
 
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-e65a3686df04        jpyedu-scipy        "tini -g -- start-no…"   6 minutes ago       Up 6 minutes        0.0.0.0:8888->8888/tcp   jupyter_notebook
+e65a3686df04        elara        "tini -g -- start-no…"   6 minutes ago       Up 6 minutes        0.0.0.0:8888->8888/tcp   jupyter_notebook
 
 $ docker stop e65a3686df04
 $ docker rm e65a3686df04    

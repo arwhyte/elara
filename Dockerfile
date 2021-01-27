@@ -5,12 +5,13 @@ LABEL maintainer="arwhyte@umich.edu"
 RUN python3 -m pip install --upgrade pip
 
 RUN pip install \
-    altair vega_datasets \
+    altair \
     folium \
     geopandas \
-    plotly \
     nbgrader \
-    rise
+    plotly \
+    rise \
+    vega_datasets
 
 # RUN conda update -n base conda
 
