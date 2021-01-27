@@ -20,32 +20,47 @@ docker build -f ./Dockerfile -t elara:latest .
 
 ## Run image in new container (JupyterLab)
 Run the image, invoking the JupyterLab interface. Flags:
-* --rm &minus; automatically clean up the container and remove the file system when the container exits. 
+* --rm &minus; automatically clean up the container and remove the file system when the container exits.
 Also removes anonymous volumes associated with the container.
 * -p &minus; set the local port to 8888 and the container port to 8888 (required).
-* -v &minus; bind local volume (name or abs path) to container volume (abs path). 
+* -v &minus; bind local volume (name or abs path) to container volume (abs path).
 * -e &minus; sets an environment variable (in this case, launching the JupyterLab interface).
 * --name &minus; set local container name.
 
-```cmd
-docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work -e JUPYTER_ENABLE_LAB=yes --name jupyter_lab elara
+```commandline
+docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work -e JUPYTER_ENABLE_LAB=yes --name lab elara
 ```
 
+You can also start the container by running `run_lab.sh` passing in both the port, volume, and local
+name as arguments:
+
+```commandline
+sh run_lab.sh 8888 /Users/arwhyte/Development/jupyter notebook
+
+```
 ## Run image in new container (Jupyter notebook classic)
 Run the image, invoking the classic Jupyter notebook interface. Other flags:
-* --rm &minus; automatically clean up the container and remove the file system when the container exits. 
+* --rm &minus; automatically clean up the container and remove the file system when the container exits.
 Also removes anonymous volumes associated with the container.
 * -p &minus; set the local port to 8888 and the container port to 8888 (required).
-* -v &minus; bind local volume (name or abs path) to container volume (abs path). 
+* -v &minus; bind local volume (name or abs path) to container volume (abs path).
 * --name &minus; set local container name.
 
 ```cmd
-docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work --name jupyter_notebook elara
+docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work --name notebook elara
+```
+
+You can also start the container by running `run_notebook.sh` passing in both the port, volume, and
+local name as arguments:
+
+```commandline
+sh run_notebook.sh 8888 /Users/arwhyte/Development/jupyter lab
+
 ```
 
 ## Remove containers
 
-:warning: Docker containers are automatically removed when you stop them if you start the container 
+:warning: Docker containers are automatically removed when you stop them if you start the container
 using the `--rm` flag (as above.
 
 ```commandline
@@ -55,12 +70,12 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 e65a3686df04        elara        "tini -g -- start-no…"   6 minutes ago       Up 6 minutes        0.0.0.0:8888->8888/tcp   jupyter_notebook
 
 $ docker stop e65a3686df04
-$ docker rm e65a3686df04    
+$ docker rm e65a3686df04
 ```
 
 ## Dockerfile
 
-Image based on Jupyter Docker Stacks 
+Image based on Jupyter Docker Stacks
 [jupyter/scipy-notebook](https://github.com/jupyter/docker-stacks/tree/master/scipy-notebook) which, in turn, is based on the jupyter/minimal-notebook.
 
 For package installs see:
