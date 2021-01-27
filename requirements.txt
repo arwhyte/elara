@@ -1,5 +1,8 @@
-altair>=3.2.0
-fuzzywuzzy>=0.17.0
-nbgrader>=0.6.1
-rise>=5.6.0
-vega-datasets>=0.7.0
+altair>=4.1.*
+folium>=0.12.*
+fuzzywuzzy>=0.18.*
+geopandas>=0.8.*
+nbgrader>=0.6.*
+plotly>=4.14.*
+rise>=5.7.*
+vega-datasets>=0.9.*
