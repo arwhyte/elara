@@ -1,6 +1,7 @@
-# jpyedu-scipy
-Docker image based on the jupyter-docker-stacks `scipy-notebook` image, which is itself based
-on the `minimal-notebook` image, which is itself based on the `base-notebook` image.
+# elara
+A Docker image based on the jupyter-docker-stacks `scipy-notebook` image, which is itself based
+on the `minimal-notebook` image, which is itself based on the `base-notebook` image. This repo and project
+is named after Elara, a prograde irregular satellite of the planet Jupiter. 
 
 See https://github.com/jupyter/docker-stacks for each image's dockerfile.
 
@@ -70,10 +71,13 @@ For package installs see:
 
 ### Additional package installs
 * altair: visualization library (requires vega_datasets)
-* nbgrader: assignments and grading
+* folium: visualization library for geospatial data
+* geopandas: extends the datatypes used by Pandas to allow spatial operations on geometric types
+* nbgrader: Jupyter-based assignments and grading
     - github: https://github.com/jupyter/nbgrader
     - docs: https://nbgrader.readthedocs.io/en/stable/
-* rise: notebook slides
+* plotly: scientific graphing library
+* rise: Jupyter-based slide views
     - github: https://github.com/damianavila/RISE
     - docs: https://rise.readthedocs.io
     - gotchas: Not yet compatible with Jupyter Lab. See https://github.com/damianavila/RISE/issues/270
