@@ -100,11 +100,3 @@ For package installs see:
 * plotly: scientific graphing library
 * rise: Jupyter-based slide views (gotchas: Not yet compatible with Jupyter Lab.
   See https://github.com/damianavila/RISE/issues/270)
-
-### Conda install flags
-
-```dockerfile
-# Install without progress bar (-q) or prompts (-y)
-RUN conda install [-q | --quiet] [-y | --yes] package_name
-
-```
