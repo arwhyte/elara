@@ -41,7 +41,7 @@ You can also start the container by running `run_lab.sh` passing in the port, vo
 name as arguments:
 
 ```commandline
-sh run_lab.sh 8888 /Users/arwhyte/Development/jupyter lab
+sh run_lab.sh 8888 /Users/arwhyte/Development/repos/github/arwhyte/notebooks lab
 ```
 
 ## Run image in new container (Jupyter notebook classic)
@@ -62,7 +62,7 @@ You can also start the container by running `run_notebook.sh` passing in the por
 local name as arguments:
 
 ```commandline
-sh run_notebook.sh 8888 /Users/arwhyte/Development/jupyter notebook
+sh run_notebook.sh 8888 /Users/arwhyte/Development/repos/github/arwhyte/notebooks notebook
 
 ```
 
