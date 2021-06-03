@@ -93,10 +93,4 @@ For package installs see:
 
 ### Additional package installs
 
-* altair: visualization library (requires vega_datasets)
-* folium: visualization library for geospatial data
-* geopandas: extends the datatypes used by Pandas to allow spatial operations on geometric types
-* nbgrader: Jupyter-based assignments and grading
-* plotly: scientific graphing library
-* rise: Jupyter-based slide views (gotchas: Not yet compatible with Jupyter Lab.
-  See https://github.com/damianavila/RISE/issues/270)
+See [requirements.txt](requirements.txt).

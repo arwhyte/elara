@@ -4,6 +4,7 @@ fuzzywuzzy>=0.18.*
 geopandas>=0.8.*
 googlemaps>=4.4.*
 nbgrader>=0.6.*
+openpyxl>=3.0.*
 plotly>=4.14.*
 rise>=5.7.*
 vega-datasets>=0.9.*
