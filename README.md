@@ -34,14 +34,14 @@ Also removes anonymous volumes associated with the container.
 * --name &minus; set local container name.
 
 ```commandline
-docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work -e JUPYTER_ENABLE_LAB=yes --name lab elara
+docker run --rm -p 8888:8888 -v /path/to/notebooks:/home/jovyan/work -e JUPYTER_ENABLE_LAB=yes --name lab elara
 ```
 
 You can also start the container by running `run_lab.sh` passing in the port, volume, and local
 name as arguments:
 
 ```commandline
-sh run_lab.sh 8888 /Users/arwhyte/Development/repos/github/arwhyte/notebooks lab
+sh run_lab.sh 8888 /path/to/notebooks lab
 ```
 
 ## Run image in new container (Jupyter notebook classic)
@@ -55,14 +55,14 @@ Also removes anonymous volumes associated with the container.
 * --name &minus; set local container name.
 
 ```cmd
-docker run --rm -p 8888:8888 -v /Users/arwhyte/Development/repos/github/arwhyte/notebooks:/home/jovyan/work --name notebook elara
+docker run --rm -p 8888:8888 -v /path/to/notebooks:/home/jovyan/work --name notebook elara
 ```
 
 You can also start the container by running `run_notebook.sh` passing in the port, volume, and
 local name as arguments:
 
 ```commandline
-sh run_notebook.sh 8888 /Users/arwhyte/Development/repos/github/arwhyte/notebooks notebook
+sh run_notebook.sh 8888 /path/to/notebooks notebook
 
 ```
 
