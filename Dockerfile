@@ -8,7 +8,7 @@ COPY ./requirements.txt /tmp/
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 # COPY . /tmp/
 
-# Add nbgrade config file
+# Add nbgrader config file
 COPY ./nbgrader_config.py /home/jovyan/nbgrader_config.py
 
 # Add nbgrader exchange directory
