@@ -6,7 +6,9 @@ VOLUME=$2
 NAME=$3
 
 docker run \
+  -it \
   --rm \
   -p ${PORT}:8888 \
+  -e DOCKER_STACKS_JUPYTER_CMD=notebook \
   -v ${VOLUME}:/home/jovyan/work \
   --name ${NAME} elara

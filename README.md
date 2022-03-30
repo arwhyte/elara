@@ -34,7 +34,7 @@ Also removes anonymous volumes associated with the container.
 * --name &minus; set local container name.
 
 ```commandline
-docker run --rm -p 8888:8888 -v /path/to/notebooks:/home/jovyan/work -e JUPYTER_ENABLE_LAB=yes --name lab elara
+docker run -it --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v /path/to/notebooks:/home/jovyan/work --name lab elara
 ```
 
 You can also start the container by running `run_lab.sh` passing in the port, volume, and local
@@ -55,7 +55,7 @@ Also removes anonymous volumes associated with the container.
 * --name &minus; set local container name.
 
 ```cmd
-docker run --rm -p 8888:8888 -v /path/to/notebooks:/home/jovyan/work --name notebook elara
+docker run -it --rm -p 8888:8888 -e DOCKER_STACKS_JUPYTER_CMD=notebook -v /path/to/notebooks:/home/jovyan/work --name notebook elara
 ```
 
 You can also start the container by running `run_notebook.sh` passing in the port, volume, and
