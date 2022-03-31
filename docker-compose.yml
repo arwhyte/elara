@@ -1,0 +1,14 @@
+---
+version: '3.9' # optional
+services:
+  jupyter:
+    image: elara:latest
+    container_name: elara
+    ports:
+      - 8888:8888
+    environment:
+      JUPYTER_ENABLE_LAB: 'yes'
+      # DOCKER_STACKS_JUPYTER_CMD: lab # starts notebook
+      JUPYTER_TOKEN: elara
+    volumes:
+      - ${PWD}:/home/jovyan/work

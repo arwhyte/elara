@@ -66,6 +66,20 @@ sh run_notebook.sh 8888 /path/to/notebooks notebook
 
 ```
 
+## Docker compose
+
+You can also start the elara Jupyter Lab container with Docker Compose:
+
+```commandline
+docker compose up
+```
+
+Access the container at [http://127.0.0.1:8888/lab?token=elara](http://127.0.0.1:8888/lab?token=elara).
+
+```commandline
+docker compose up --remove-orphans
+```
+
 ## Remove containers
 
 :warning: Docker containers are automatically removed when you stop them if you start the container

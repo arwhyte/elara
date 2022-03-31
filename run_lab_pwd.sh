@@ -6,8 +6,8 @@ PORT=$1
 NAME=$2
 
 docker run \
-  -it \
   --rm \
+  -it \
   -p ${PORT}:8888 \
   -e JUPYTER_ENABLE_LAB=yes \
   -v ${PWD}:/home/jovyan/work \
