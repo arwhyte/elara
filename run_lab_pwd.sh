@@ -3,7 +3,7 @@
 # User-supplied values
 PORT=$1
 # VOLUME=$2
-NAME=$3
+NAME=$2
 
 docker run \
   -it \
