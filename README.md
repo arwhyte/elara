@@ -76,10 +76,6 @@ docker compose up
 
 Access the container at [http://127.0.0.1:8888/lab?token=elara](http://127.0.0.1:8888/lab?token=elara).
 
-```commandline
-docker compose up --remove-orphans
-```
-
 ## Remove containers
 
 :warning: Docker containers are automatically removed when you stop them if you start the container
@@ -93,6 +89,12 @@ e65a3686df04        elara        "tini -g -- start-no…"   6 minutes ago       
 
 $ docker stop e65a3686df04
 $ docker rm e65a3686df04
+```
+
+:exclamation: By default stopped service containers created by `docker compose up` or `docker compose run` are not removed. To eliminate these one-off containers run the following command:
+
+```commandline
+docker compose rm
 ```
 
 ## Dockerfile
