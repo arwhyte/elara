@@ -10,7 +10,6 @@ googlemaps>=4.4.*
 lxml>=4.6.*
 missingno>=0.4.*
 nbdime>=3.1.*
-nbgrader>=0.6.*
 openpyxl>=3.0.*
 pandas-profiling>=3.0.*
 pgeocode>=0.3.*

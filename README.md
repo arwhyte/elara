@@ -34,7 +34,7 @@ Also removes anonymous volumes associated with the container.
 * --name &minus; set local container name.
 
 ```commandline
-docker run -it --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v /path/to/notebooks:/home/jovyan/work --name lab elara
+docker run --rm -it -p 8888:8888 -v /path/to/notebooks:/home/jovyan/work --name lab elara
 ```
 
 You can also start the container by running `run_lab.sh` passing in the port, volume, and local
@@ -55,7 +55,7 @@ Also removes anonymous volumes associated with the container.
 * --name &minus; set local container name.
 
 ```cmd
-docker run -it --rm -p 8888:8888 -e DOCKER_STACKS_JUPYTER_CMD=notebook -v /path/to/notebooks:/home/jovyan/work --name notebook elara
+docker run --rm -it -p 8888:8888 -e DOCKER_STACKS_JUPYTER_CMD=notebook -v /path/to/notebooks:/home/jovyan/work --name notebook elara
 ```
 
 You can also start the container by running `run_notebook.sh` passing in the port, volume, and
@@ -68,28 +68,13 @@ sh run_notebook.sh 8888 /path/to/notebooks notebook
 
 ## Docker compose
 
-You can also start the elara Jupyter Lab container with Docker Compose:
+You can also start the elara Jupyter Lab container with [Docker Compose](https://docs.docker.com/compose/reference/). Place a copy of elara's `docker-compose.yml` in the root directory of your project. Then run
 
 ```commandline
 docker compose up
 ```
 
 Access the container at [http://127.0.0.1:8888/lab?token=elara](http://127.0.0.1:8888/lab?token=elara).
-
-## Remove containers
-
-:warning: Docker containers are automatically removed when you stop them if you start the container
-using the `--rm` flag (as above.
-
-```commandline
-$ docker container ls -a
-
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-e65a3686df04        elara        "tini -g -- start-no…"   6 minutes ago       Up 6 minutes        0.0.0.0:8888->8888/tcp   jupyter_notebook
-
-$ docker stop e65a3686df04
-$ docker rm e65a3686df04
-```
 
 :exclamation: By default stopped service containers created by `docker compose up` or `docker compose run` are not removed. To eliminate these one-off containers run the following command:
 

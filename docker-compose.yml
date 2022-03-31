@@ -7,8 +7,6 @@ services:
     ports:
       - 8888:8888
     environment:
-      JUPYTER_ENABLE_LAB: 'yes'
-      # DOCKER_STACKS_JUPYTER_CMD: lab # ignored, starts notebook
       JUPYTER_TOKEN: elara
     volumes:
       - ${PWD}:/home/jovyan/work
