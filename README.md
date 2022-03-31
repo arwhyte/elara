@@ -11,7 +11,7 @@ This image adds a number of additional packages including
 [nbgrader](https://github.com/jupyter/nbgrader)
 and [rise](https://github.com/damianavila/RISE).
 
-## Generate image
+## 1.0 Generate image
 
 Build the image. Note the trailing ".". Flags:
 
@@ -22,7 +22,9 @@ Build the image. Note the trailing ".". Flags:
 docker build -f ./Dockerfile -t elara:latest .
 ```
 
-## Run image in new container (JupyterLab)
+## 2.0 Running images
+
+### 2.1 Starting JuypterLab in a new container
 
 Run the image, invoking the JupyterLab interface. Flags:
 
@@ -44,7 +46,23 @@ name as arguments:
 sh run_lab.sh 8888 /path/to/notebooks lab
 ```
 
-## Run image in new container (Jupyter notebook classic)
+### 2.2 Starting JupyterLab using Docker Compose
+
+You can also start the elara Jupyter Lab container with [Docker Compose](https://docs.docker.com/compose/reference/). Place a copy of elara's `docker-compose.yml` in the root directory of your project. Then run
+
+```commandline
+docker compose up
+```
+
+Access the container at [http://127.0.0.1:8888/lab?token=elara](http://127.0.0.1:8888/lab?token=elara).
+
+:exclamation: By default stopped service containers created by `docker compose up` or `docker compose run` are not removed. To eliminate these one-off containers run the following command:
+
+```commandline
+docker compose rm
+```
+
+### 2.3 Starting Jupyter notebook in a new container
 
 Run the image, invoking the classic Jupyter notebook interface. Other flags:
 
@@ -66,32 +84,14 @@ sh run_notebook.sh 8888 /path/to/notebooks notebook
 
 ```
 
-## Docker compose
-
-You can also start the elara Jupyter Lab container with [Docker Compose](https://docs.docker.com/compose/reference/). Place a copy of elara's `docker-compose.yml` in the root directory of your project. Then run
-
-```commandline
-docker compose up
-```
-
-Access the container at [http://127.0.0.1:8888/lab?token=elara](http://127.0.0.1:8888/lab?token=elara).
-
-:exclamation: By default stopped service containers created by `docker compose up` or `docker compose run` are not removed. To eliminate these one-off containers run the following command:
-
-```commandline
-docker compose rm
-```
-
-## Dockerfile
+## 3.0 Dockerfile
 
 Image based on Jupyter Docker Stacks
 [jupyter/scipy-notebook](https://github.com/jupyter/docker-stacks/tree/master/scipy-notebook) which, in turn, is based on the jupyter/minimal-notebook.
 
-For package installs see:
+For Jupyter Docker Stacks package installs see:
 
 * minimal-notebook [Dockerfile](https://github.com/jupyter/docker-stacks/blob/36bce751008f2c38cf9bd1cfc5f4ba46f6b426f1/minimal-notebook/Dockerfile)
 * scipy-notebook [Dockerfile](https://github.com/jupyter/docker-stacks/blob/414b5d749704fc5abf15b5703551f0acb18e189a/scipy-notebook/Dockerfile)
 
-### Additional package installs
-
-See [requirements.txt](requirements.txt).
+For additional elara package installs see [requirements.txt](requirements.txt).
