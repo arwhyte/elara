@@ -7,6 +7,6 @@ services:
     ports:
       - 8888:8888
     environment:
-      JUPYTER_TOKEN: elara
+      JUPYTER_TOKEN: some_token
     volumes:
       - ${PWD}:/home/jovyan/work
