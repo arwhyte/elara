@@ -1,4 +1,4 @@
-ARG BASE_CONTAINER=jupyter/scipy-notebook:latest
+ARG BASE_CONTAINER=quay.io/jupyter/scipy-notebook:latest
 FROM ${BASE_CONTAINER}
 
 LABEL maintainer="arwhyte@umich.edu"

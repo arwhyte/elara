@@ -28,8 +28,8 @@ docker build -f ./Dockerfile -t elara:latest .
 
 Run the image, invoking the JupyterLab interface. Flags:
 
-* --rm &minus; automatically clean up the container and remove the file system when the container exits.
-Also removes anonymous volumes associated with the container.
+* --rm &minus; automatically clean up the container and remove the file system when the container
+  exits. Also removes anonymous volumes associated with the container.
 * -p &minus; set the local port to 8888 and the container port to 8888 (required).
 * -v &minus; bind local volume (name or abs path) to container volume (abs path).
 * -e &minus; sets an environment variable (in this case, launching the JupyterLab interface).
@@ -48,7 +48,8 @@ sh run_lab.sh 8888 /path/to/notebooks lab
 
 ### 2.2 Starting JupyterLab using Docker Compose
 
-You can also start the elara Jupyter Lab container with [Docker Compose](https://docs.docker.com/compose/reference/). Place a copy of elara's `docker-compose.yml` in the root directory of your project. Then run
+You can also start the elara Jupyter Lab container with [Docker Compose](https://docs.docker.com/compose/reference/).
+Place a copy of elara's `docker-compose.yml` in the root directory of your project. Then run
 
 ```commandline
 docker compose up
@@ -56,7 +57,9 @@ docker compose up
 
 Access the container at [http://127.0.0.1:8888/lab?token=elara](http://127.0.0.1:8888/lab?token=elara).
 
-:exclamation: By default stopped service containers created by `docker compose up` or `docker compose run` are not removed. To eliminate these one-off containers run the following command:
+:exclamation: By default stopped service containers created by `docker compose up` or
+`docker compose run` are not removed. To eliminate these one-off containers run the following
+command:
 
 ```commandline
 docker compose rm
@@ -66,8 +69,8 @@ docker compose rm
 
 Run the image, invoking the classic Jupyter notebook interface. Other flags:
 
-* --rm &minus; automatically clean up the container and remove the file system when the container exits.
-Also removes anonymous volumes associated with the container.
+* --rm &minus; automatically clean up the container and remove the file system when the container
+  exits. Also removes anonymous volumes associated with the container.
 * -p &minus; set the local port to 8888 and the container port to 8888 (required).
 * -v &minus; bind local volume (name or abs path) to container volume (abs path).
 * --name &minus; set local container name.
@@ -87,11 +90,11 @@ sh run_notebook.sh 8888 /path/to/notebooks notebook
 ## 3.0 Dockerfile
 
 Image based on Jupyter Docker Stacks
-[jupyter/scipy-notebook](https://github.com/jupyter/docker-stacks/tree/master/scipy-notebook) which, in turn, is based on the jupyter/minimal-notebook.
+[jupyter/scipy-notebook](https://github.com/jupyter/docker-stacks/tree/main/images/scipy-notebook) which, in turn, is based on the jupyter/[minimal-notebook](https://github.com/jupyter/docker-stacks/tree/main/images/minimal-notebook).
 
 For Jupyter Docker Stacks package installs see:
 
-* minimal-notebook [Dockerfile](https://github.com/jupyter/docker-stacks/blob/36bce751008f2c38cf9bd1cfc5f4ba46f6b426f1/minimal-notebook/Dockerfile)
-* scipy-notebook [Dockerfile](https://github.com/jupyter/docker-stacks/blob/414b5d749704fc5abf15b5703551f0acb18e189a/scipy-notebook/Dockerfile)
+* scipy-notebook [Dockerfile](https://github.com/jupyter/docker-stacks/blob/main/images/scipy-notebook/Dockerfile)
+* minimal-notebook [Dockerfile](https://github.com/jupyter/docker-stacks/blob/main/images/minimal-notebook/Dockerfile)
 
 For additional elara package installs see [requirements.txt](requirements.txt).
