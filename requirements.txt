@@ -1,5 +1,5 @@
-altair>=5.5.*
-jupyter_server<=2.14.* # compatible with nbgrader 0.9.*
-# jupyter_server>=2.16.*
-nbgrader>=0.9.*
-watermark>=2.5.*
+altair>=5.5
+jupyter_server<=2.14 # compatible with nbgrader 0.9.*
+# jupyter_server>=2.16
+nbgrader>=0.9
+watermark>=2.5
