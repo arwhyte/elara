@@ -1,7 +1,5 @@
-altair>=4.2.*
-folium>=0.14.*
-jupyter_server>=2.0.*
-missingno>=0.5.*
-# nbgrader>=0.8.*
-plotly>=5.13.*
-watermark>=2.3.*
+altair>=5.5.*
+jupyter_server<=2.14.* # compatible with nbgrader 0.9.*
+# jupyter_server>=2.16.*
+nbgrader>=0.9.*
+watermark>=2.5.*

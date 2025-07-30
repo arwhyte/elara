@@ -3,16 +3,28 @@ FROM ${BASE_CONTAINER}
 
 LABEL maintainer="arwhyte@umich.edu"
 
-# Install additional 3rd-party packages
-RUN python3 -m pip install --upgrade pip
-COPY ./requirements.txt /tmp/
+# Copy requirements.txt into the image
+COPY ./requirements.txt /tmp/requirements.txt
+
+# Install Python dependencies
 RUN python3 -m pip install --no-cache-dir -r /tmp/requirements.txt
-# COPY . /tmp/
 
-# WARN: nbgrader 0.8.1 depends on jupyter-server>=1.12
-# Commented out nbgrader>=0.8.* from requirements.txt on 20230125
-# Add nbgrader config file
-# COPY ./nbgrader_config.py /home/jovyan/nbgrader_config.py
+# Enable nbgrader and its extensions
+RUN jupyter nbextension install --sys-prefix --py nbgrader \
+ && jupyter nbextension enable --sys-prefix --py nbgrader \
+ && jupyter serverextension enable --sys-prefix --py nbgrader
 
-# Add nbgrader exchange directory
-# RUN mkdir -p /tmp/nbgrader/exchange && chmod ugo+rw /tmp/nbgrader/exchange
+# Optional: Enable labextension support for nbgrader
+RUN jupyter labextension install @jupyterlab/server-proxy --no-build
+
+# Set working directory
+WORKDIR /home/jovyan
+
+# (Optional) Pre-create course directory
+RUN mkdir -p /home/jovyan/nbgrader
+
+# Copy optional custom config (if you use it)
+COPY config/jupyter_notebook_config.py /etc/jupyter/
+
+# Ensure correct permissions
+RUN chown -R jovyan:users /etc/jupyter /home/jovyan

@@ -1,12 +1,26 @@
----
-version: '3.9' # optional
 services:
   jupyter:
-    image: elara:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: elara
+    image: elara:latest
+
     ports:
       - 8888:8888
-    environment:
-      JUPYTER_TOKEN: some_token
+
     volumes:
-      - ${PWD}:/home/jovyan/work
+      - ${PWD}:/home/jovyan/work        # Mount local working directory
+      - jupyter-config:/etc/jupyter     # Persist Jupyter config
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN}  # Pulled from .env
+      - NB_USER=jovyan
+      - NB_UID=1000
+      - NB_GID=100
+
+    user: "1000:100"             # Matches NB_UID:GID explicitly
+    restart: unless-stopped      # Auto restart on reboot/failure
+
+volumes:
+  jupyter-config:                # Named volume for /etc/jupyter

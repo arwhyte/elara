@@ -1,2 +1,7 @@
-README.md
+__pycache__/
+*.pyc
+*.ipynb_checkpoints/
+.env
+.DS_Store
 elara.code-workspace
+README.md
