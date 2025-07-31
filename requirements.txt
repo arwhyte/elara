@@ -6,4 +6,5 @@ nbgrader==0.9.5
 notebook>=7.2.0,<8.0
 numpy
 pandas
+scipy
 watermark>=2.5

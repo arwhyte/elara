@@ -11,6 +11,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     npm \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Create non-root user with fixed UID/GID (1000:100) to match docker-compose
+RUN useradd -m -u 1000 -o -s /bin/bash jovyan || true
+
+# Set HOME explicitly
+ENV HOME=/home/jovyan
+
+# Set working directory for notebooks and ensure ownership
+RUN mkdir -p ${HOME}/work \
+ && chown -R 1000:100 ${HOME}
+
+WORKDIR ${HOME}/work
+
 # Copy requirements.txt into the image
 COPY ./requirements.txt /tmp/requirements.txt
 
@@ -21,14 +33,9 @@ RUN pip install --upgrade pip \
 # Enable nbgrader server extension (Jupyter Server 2.x+)
 RUN jupyter server extension enable --sys-prefix nbgrader.server_extensions.formgrader
 
-# Create default notebook directory and ensure correct permissions
-RUN mkdir -p /home/jovyan/work && chown -R 1000:100 /home/jovyan
-
-# Set default working directory (launches Jupyter here)
-WORKDIR /home/jovyan/work
+# Copy custom nbgrader config into Jupyter's config directory
+COPY config/jupyter_notebook_config.py /etc/jupyter/
+RUN chown 1000:100 /etc/jupyter/jupyter_notebook_config.py
 
 # Expose default Jupyter port
 EXPOSE 8888
-
-# Run JupyterLab in insecure dev mode (customize for prod!)
-# CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=", "--NotebookApp.password="]

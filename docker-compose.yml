@@ -9,9 +9,11 @@ services:
     ports:
       - 8888:8888
 
+    user: "1000:100"                  # Match UID:GID
+
     volumes:
       - ${PWD}:/home/jovyan/work      # Mount working directory
-      - jupyter-config:/etc/jupyter   # Persist Jupyter config
+      # - jupyter-config:/etc/jupyter   # Persist Jupyter config
 
     environment:
       - JUPYTER_ENABLE_LAB=yes
@@ -20,7 +22,6 @@ services:
       - NB_GID=100
       - JUPYTER_TOKEN=${JUPYTER_TOKEN:-devtoken}  # Use .env or fallback
 
-    user: "1000:100"                # Match UID:GID
     restart: unless-stopped         # Restart on reboot/failure
 
     command: >
@@ -31,10 +32,10 @@ services:
       --NotebookApp.token=${JUPYTER_TOKEN}
       --NotebookApp.password=''
 
-volumes:
-  jupyter-config:                  # Persistent volume for /etc/jupyter
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/config
-      o: bind
+# volumes:
+#   jupyter-config:                  # Persistent volume for /etc/jupyter
+#     driver: local
+#     driver_opts:
+#       type: none
+#       device: ${PWD}/config
+#       o: bind
