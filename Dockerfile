@@ -34,8 +34,8 @@ RUN pip install --upgrade pip \
 RUN jupyter server extension enable --sys-prefix nbgrader.server_extensions.formgrader
 
 # Copy custom nbgrader config into Jupyter's config directory
-COPY config/jupyter_notebook_config.py /etc/jupyter/
-RUN chown 1000:100 /etc/jupyter/jupyter_notebook_config.py
+COPY config/nbgrader_config.py /etc/jupyter/
+RUN chown 1000:100 /etc/jupyter/nbgrader_config.py
 
 # Expose default Jupyter port
 EXPOSE 8888
