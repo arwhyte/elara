@@ -1,30 +1,34 @@
-ARG BASE_CONTAINER=quay.io/jupyter/scipy-notebook:latest
-FROM ${BASE_CONTAINER}
+FROM python:3.12.3-slim-bullseye
 
 LABEL maintainer="arwhyte@umich.edu"
+
+# Upgrade system packages and install necessary dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    curl \
+    nodejs \
+    npm \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements.txt into the image
 COPY ./requirements.txt /tmp/requirements.txt
 
 # Install Python dependencies
-RUN python3 -m pip install --no-cache-dir -r /tmp/requirements.txt
+RUN pip install --upgrade pip \
+ && pip install --no-cache-dir -r /tmp/requirements.txt
 
-# Enable nbgrader and its extensions
-RUN jupyter nbextension install --sys-prefix --py nbgrader \
- && jupyter nbextension enable --sys-prefix --py nbgrader \
- && jupyter serverextension enable --sys-prefix --py nbgrader
+# Enable nbgrader server extension (Jupyter Server 2.x+)
+RUN jupyter server extension enable --sys-prefix nbgrader.server_extensions.formgrader
 
-# Optional: Enable labextension support for nbgrader
-RUN jupyter labextension install @jupyterlab/server-proxy --no-build
+# Create default notebook directory and ensure correct permissions
+RUN mkdir -p /home/jovyan/work && chown -R 1000:100 /home/jovyan
 
-# Set working directory
-WORKDIR /home/jovyan
+# Set default working directory (launches Jupyter here)
+WORKDIR /home/jovyan/work
 
-# (Optional) Pre-create course directory
-RUN mkdir -p /home/jovyan/nbgrader
+# Expose default Jupyter port
+EXPOSE 8888
 
-# Copy optional custom config (if you use it)
-COPY config/jupyter_notebook_config.py /etc/jupyter/
-
-# Ensure correct permissions
-RUN chown -R jovyan:users /etc/jupyter /home/jovyan
+# Run JupyterLab in insecure dev mode (customize for prod!)
+# CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=", "--NotebookApp.password="]

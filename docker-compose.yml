@@ -10,17 +10,31 @@ services:
       - 8888:8888
 
     volumes:
-      - ${PWD}:/home/jovyan/work        # Mount local working directory
-      - jupyter-config:/etc/jupyter     # Persist Jupyter config
+      - ${PWD}:/home/jovyan/work      # Mount working directory
+      - jupyter-config:/etc/jupyter   # Persist Jupyter config
+
     environment:
       - JUPYTER_ENABLE_LAB=yes
-      - JUPYTER_TOKEN=${JUPYTER_TOKEN}  # Pulled from .env
       - NB_USER=jovyan
       - NB_UID=1000
       - NB_GID=100
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN:-devtoken}  # Use .env or fallback
 
-    user: "1000:100"             # Matches NB_UID:GID explicitly
-    restart: unless-stopped      # Auto restart on reboot/failure
+    user: "1000:100"                # Match UID:GID
+    restart: unless-stopped         # Restart on reboot/failure
+
+    command: >
+      jupyter lab
+      --ip=0.0.0.0
+      --allow-root
+      --NotebookApp.notebook_dir=/home/jovyan/work
+      --NotebookApp.token=${JUPYTER_TOKEN}
+      --NotebookApp.password=''
 
 volumes:
-  jupyter-config:                # Named volume for /etc/jupyter
+  jupyter-config:                  # Persistent volume for /etc/jupyter
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/config
+      o: bind

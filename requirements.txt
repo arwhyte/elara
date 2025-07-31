@@ -1,5 +1,9 @@
 altair>=5.5
-jupyter_server>=2.0,<2.15 # compatible with nbgrader 0.9.*
-# jupyter_server>=2.16
-nbgrader>=0.9
+jupyterlab==4.4.3
+# jupyterlab==4.2.7
+jupyter_server>=2.0,<2.15
+nbgrader==0.9.5
+notebook>=7.2.0,<8.0
+numpy
+pandas
 watermark>=2.5
