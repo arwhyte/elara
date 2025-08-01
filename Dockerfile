@@ -19,7 +19,7 @@ ENV HOME=/home/jovyan
 
 # Set working directory for notebooks and ensure ownership
 RUN mkdir -p ${HOME}/work \
- && chown -R 1000:100 ${HOME}
+    && chown -R 1000:100 ${HOME}
 
 WORKDIR ${HOME}/work
 
@@ -28,7 +28,7 @@ COPY ./requirements.txt /tmp/requirements.txt
 
 # Install Python dependencies
 RUN pip install --upgrade pip \
- && pip install --no-cache-dir -r /tmp/requirements.txt
+    && pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Enable nbgrader server extension (Jupyter Server 2.x+)
 RUN jupyter server extension enable --sys-prefix nbgrader.server_extensions.formgrader
@@ -36,6 +36,11 @@ RUN jupyter server extension enable --sys-prefix nbgrader.server_extensions.form
 # Copy custom nbgrader config into Jupyter's config directory
 COPY config/nbgrader_config.py /etc/jupyter/
 RUN chown 1000:100 /etc/jupyter/nbgrader_config.py
+
+# Create directories for nbgrader and exchange
+RUN mkdir -p /home/jovyan/work/nbgrader \
+    && mkdir -p /home/jovyan/work/exchange \
+    && chown -R jovyan:users /home/jovyan/work
 
 # Expose default Jupyter port
 EXPOSE 8888

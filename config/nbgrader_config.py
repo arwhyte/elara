@@ -6,9 +6,10 @@ cfg.NotebookApp.nbserver_extensions = {
 }
 
 # Course root directory (can be the same as /home/jovyan/nbgrader)
-cfg.CourseDirectory.root = '/home/jovyan/nbgrader'
+# cfg.CourseDirectory.root = '/home/jovyan/nbgrader'
+cfg.CourseDirectory.root = '/home/jovyan/work/nbgrader'
 
 # Autograde settings
-cfg.Exchange.root = '/home/jovyan/exchange'
+cfg.Exchange.root = '/home/jovyan/work/exchange'
 cfg.IncludeHeaderFooter.header = "source/header.ipynb"
 cfg.IncludeHeaderFooter.footer = "source/footer.ipynb"

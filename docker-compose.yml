@@ -13,7 +13,6 @@ services:
 
     volumes:
       - ${PWD}:/home/jovyan/work      # Mount working directory
-      # - jupyter-config:/etc/jupyter   # Persist Jupyter config
 
     environment:
       - JUPYTER_ENABLE_LAB=yes
@@ -28,14 +27,7 @@ services:
       jupyter lab
       --ip=0.0.0.0
       --allow-root
-      --NotebookApp.notebook_dir=/home/jovyan/work
-      --NotebookApp.token=${JUPYTER_TOKEN}
-      --NotebookApp.password=''
-
-# volumes:
-#   jupyter-config:                  # Persistent volume for /etc/jupyter
-#     driver: local
-#     driver_opts:
-#       type: none
-#       device: ${PWD}/config
-#       o: bind
+      --ServerApp.open_browser=False
+      --ServerApp.root_dir=/home/jovyan/work
+      --ServerApp.token=${JUPYTER_TOKEN}
+      --ServerApp.password=''
